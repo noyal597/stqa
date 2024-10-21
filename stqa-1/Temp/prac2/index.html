@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .error{
+        color:red;
+    }
+</style>
+<body>
+    <form id="myform" onsubmit="return Validateform()">
+        Email:<input type="email" id="email" required/>
+        Pass:<input type="password" id="pass" required />
+        <button type="submit">Submit</button>
+    </form><br>
+    <a href="get_info.html">Know about us</a>
+    <script>
+        function Validateform(){
+            const email = document.getElementById("email").value;
+            const pass = document.getElementById("pass").value;
+            const at = "@gmail.com";
+            if(!email.includes(at)){
+                alert("email verification failed");
+                return false; 
+            }
+            if(pass.length < 6){
+                alert("pass verification failed");
+                return false; 
+            }
+           
+            window.location.href = "get_info.html";
+            return false; 
+        }
+    </script>
+</body>
+</html>

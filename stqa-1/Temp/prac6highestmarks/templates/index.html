@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prac6</title>
+</head>
+<body>
+    <style>
+        table,th,td{
+            border:1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+    <body>
+        <table id="mytab">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Sub-1</th>
+                <th>Sub-2</th>
+                <th>Sub-3</th>
+            </tr>
+            {% for row in data%}
+            <tr>
+                <td>{{row["id"]}}</td>
+                <td>{{row["Name"]}}</td>
+                <td>{{row["Gender"]}}</td>
+                <td>{{row["sub-1"]}}</td>
+                <td>{{row["sub-2"]}}</td>
+                <td>{{row["sub-3"]}}</td>
+
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+    
+</body>
+</html>

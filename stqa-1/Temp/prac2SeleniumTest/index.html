@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Log in Page</title>
+	<link rel="stylesheet" href="/style.css">
+	<style>
+		body {
+			background-color: black;
+			color: ghostwhite;
+		}
+	</style>
+</head>
+
+<body>
+	<form id="user" onsubmit="validateInput(); return false;">
+		<table>
+			<tr><td>Enter Email : </td> <td><input id="email"></td></tr>
+			<tr><td>Enter Password : </td> <td><input id="pass" type="password"></td></tr>
+			<tr><td><a href="https://i.imgflip.com/4mng9x.jpg">Forgot Password?</a></td></tr>
+			<tr><td><input type="submit" value="Log in"></td></tr>
+		</table>
+	</form>
+</body>
+
+<script>
+	function validateInput() {
+		const email = document.getElementById('email').value;
+		const pass = document.getElementById('pass').value;
+		const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (!emailPattern.test(email)) {
+			alert("Please enter a valid email address.");
+			return false;
+		}
+		if (pass.length < 6) {
+			alert("The password must be longer than 6 charecters.");
+			return false;
+		}
+		document.body.innerHTML = "Welcome " + email + ". You are logged in!";
+		return false;
+	}
+</script>
+
+</html>
+

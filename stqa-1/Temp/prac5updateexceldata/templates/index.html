@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Student Records</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <h1>Update Student Records</h1>
+    <form id="updateForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="age">Update Age:</label><br>
+        <input type="text" id="age" name="age"><br><br>
+        <label for="grade">Update Grade:</label><br>
+        <input type="text" id="grade" name="grade"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <p id="msg"></p>
+    <br><br>
+
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row['Name'] }}</td>
+                <td>{{ row['Age'] }}</td>
+                <td>{{ row['Grade'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById("updateForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            var name = document.getElementById("name").value;
+            var age = document.getElementById("age").value;
+            var grade = document.getElementById("grade").value;
+
+            // Validate the input data
+            if (name === "" || (age === "" && grade === "")) {
+                document.getElementById("msg").innerHTML = "Please enter a name and either an updated age or an updated grade.";
+                return;
+            }
+
+            // Locate the row in the table corresponding to the entered name
+            var table = document.getElementById("myTable");
+            var rows = table.rows;
+            var rowIndex = -1;
+            for (var i = 1; i < rows.length; i++) {
+                if (rows[i].cells[0].innerHTML === name) {
+                    rowIndex = i;
+                    break;
+                }
+            }
+
+            // Check if a row was found
+            if (rowIndex === -1) {
+                document.getElementById("msg").innerHTML = "No student record found with that name.";
+                return;
+            }
+
+            // Update the age and grade in the table
+            if (age !== "") {
+                if (rows[rowIndex].cells[1].innerHTML === age) {
+                    document.getElementById("msg").innerHTML = "The updated age is the same as the old age.";
+                    return;
+                } else {
+                    rows[rowIndex].cells[1].innerHTML = age;
+                }
+            }
+            if (grade !== "") {
+                rows[rowIndex].cells[2].innerHTML = grade;
+            }
+
+            // Display a success message
+            document.getElementById("msg").innerHTML = "Student record updated successfully!";
+
+            // Reset the form
+            document.getElementById("updateForm").reset();
+        });
+    </script>
+</body>
+</html>
